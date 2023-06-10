@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Flipkart Scenario Suite">
+<parameter name="baseUrl" value="https://www.flipkart.com/" />
+  <test thread-count="5" name="FlipkartScenario Test">
+    <classes>
+      <class name="com.QA.CaseStudy1.Scenario2.FlipkartScenario"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

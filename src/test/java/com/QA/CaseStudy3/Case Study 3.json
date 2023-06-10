@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "2bd4270a-ebbb-4ec2-aee5-38758b199255",
+		"name": "Case Study 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getSingleResource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Positive Test Cases\r",
+							"\r",
+							"// Verify that the HTTP status code is 200 (OK)\r",
+							"pm.test(\"Positive Test - Verify HTTP status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verify the presence of specific fields in the response body\r",
+							"pm.test(\"Positive Test - Verify the presence of 'id' field\", function () {\r",
+							"    pm.response.to.have.jsonBody('data.id');\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the presence of 'name' field\", function () {\r",
+							"    pm.response.to.have.jsonBody('data.name');\r",
+							"});\r",
+							"\r",
+							"// Verify the specific values of fields\r",
+							"pm.test(\"Positive Test - Verify the value of 'id' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.id).to.equal(2);\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the value of 'name' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.name).to.equal(\"fuchsia rose\");\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the value of 'year' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.year).to.equal(2001);\r",
+							"});\r",
+							"// Verify the presence of 'support' object and its fields\r",
+							"pm.test(\"Positive Test - Verify the presence of 'support' object\", function () {\r",
+							"    pm.response.to.have.jsonBody('support');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Negative Test Cases\r",
+							"\r",
+							"// Verify that the HTTP status code is not 404 (Not Found)\r",
+							"pm.test(\"Negative Test - Verify HTTP status code is not 404\", function () {\r",
+							"    pm.response.to.not.have.status(404);\r",
+							"});\r",
+							"\r",
+							"// Verify that the HTTP status code is not 500 (Internal Server Error)\r",
+							"pm.test(\"Negative Test - Verify HTTP status code is not 500\", function () {\r",
+							"    pm.response.to.not.have.status(500);\r",
+							"});\r",
+							"\r",
+							"// Verify the absence of specific values of fields\r",
+							"pm.test(\"Negative Test - Verify 'id' field is not a specific value\", function () {\r",
+							"    pm.expect(pm.response.json().data.id).to.not.equal(2);\r",
+							"});\r",
+							"pm.test(\"Negative Test - Verify 'name' field is not a specific value\", function () {\r",
+							"    pm.expect(pm.response.json().data.name).to.not.equal(\"fuchsia rose\");\r",
+							"});\r",
+							"pm.test(\"Negative Test - Verify 'year' field is not a specific value\", function () {\r",
+							"    pm.expect(pm.response.json().data.year).to.not.equal(2001);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/unknown/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"unknown",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Positive Test Cases\r",
+							"\r",
+							"// Verify the HTTP status code is 200 (OK)\r",
+							"pm.test(\"Positive Test - Verify HTTP status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Verify the presence of specific fields in the response body\r",
+							"pm.test(\"Positive Test - Verify the presence of 'page' field\", function () {\r",
+							"    pm.response.to.have.jsonBody('page');\r",
+							"});\r",
+							"// Verify the specific values of fields\r",
+							"pm.test(\"Positive Test - Verify the value of 'page' field\", function () {\r",
+							"    pm.expect(pm.response.json().page).to.equal(1);\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the value of 'per_page' field\", function () {\r",
+							"    pm.expect(pm.response.json().per_page).to.equal(6);\r",
+							"});\r",
+							"// Verify the presence and specific values of fields within 'data' array\r",
+							"pm.test(\"Positive Test - Verify the presence and value of 'id' field within 'data' array\", function () {\r",
+							"    pm.response.to.have.jsonBody('data[0].id');\r",
+							"    pm.expect(pm.response.json().data[0].id).to.be.a('number');\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the presence and value of 'email' field within 'data' array\", function () {\r",
+							"    pm.response.to.have.jsonBody('data[0].email');\r",
+							"    pm.expect(pm.response.json().data[0].email).to.be.a('string').and.not.empty;\r",
+							"});\r",
+							"\r",
+							"//Negative Test Cases\r",
+							"\r",
+							"// Verify that the HTTP status code is not 404 (Not Found)\r",
+							"pm.test(\"Negative Test - Verify HTTP status code is not 404\", function () {\r",
+							"    pm.response.to.not.have.status(404);\r",
+							"});\r",
+							"\r",
+							"// Verify that the HTTP status code is not 500 (Internal Server Error)\r",
+							"pm.test(\"Negative Test - Verify HTTP status code is not 500\", function () {\r",
+							"    pm.response.to.not.have.status(500);\r",
+							"});\r",
+							"// Verify that the HTTP status code is not 401 (Unauthorized)\r",
+							"pm.test(\"Negative Test - Verify HTTP status code is not 401\", function () {\r",
+							"    pm.response.to.not.have.status(401);\r",
+							"});\r",
+							"\r",
+							"// Verify the absence of specific fields in the response body\r",
+							"pm.test(\"Negative Test - Verify the absence of 'invalid_field' field\", function () {\r",
+							"    pm.response.to.not.have.jsonBody('invalid_field');\r",
+							"});\r",
+							"pm.test(\"Negative Test - Verify the absence of 'data[0].invalid_field' field\", function () {\r",
+							"    pm.response.to.not.have.jsonBody('data[0].invalid_field');\r",
+							"});\r",
+							"\r",
+							"// Verify that specific fields have different values than the expected ones\r",
+							"pm.test(\"Negative Test - Verify 'page' field has a different value\", function () {\r",
+							"    pm.expect(pm.response.json().page).to.not.equal(2);\r",
+							"});\r",
+							"pm.test(\"Negative Test - Verify 'total' field is null or undefined\", function () {\r",
+							"    pm.expect(pm.response.json().total).to.be.null.or.undefined;\r",
+							"});\r",
+							"// Verify the size of 'data' array is not greater than 10\r",
+							"pm.test(\"Negative Test - Verify 'data' array size is not greater than 10\", function () {\r",
+							"    pm.expect(pm.response.json().data.length).to.be.at.most(10);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=1",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

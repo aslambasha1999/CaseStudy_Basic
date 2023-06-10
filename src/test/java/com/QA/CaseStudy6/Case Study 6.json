@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "670df49d-d06e-41a8-96f9-85811274827c",
+		"name": "Case Study 6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getUserByID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Positive Test Cases\r",
+							"\r",
+							"// Verify that the HTTP status code is 200 (OK)\r",
+							"pm.test(\"Positive Test - Verify HTTP status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"// Verify the presence of specific fields in the response body\r",
+							"pm.test(\"Positive Test - Verify the presence of 'id' field\", function () {\r",
+							"    pm.response.to.have.jsonBody('data.id');\r",
+							"});\r",
+							"\r",
+							"// Verify the format of specific fields\r",
+							"pm.test(\"Positive Test - Verify the format of 'avatar' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.avatar).to.match(/^https?:\\/\\/\\S+/);\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the format of 'email' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.email).to.match(/\\S+@\\S+\\.\\S+/);\r",
+							"});\r",
+							"\r",
+							"// Verify the non-empty values of specific fields\r",
+							"pm.test(\"Positive Test - Verify 'first_name' field is a non-empty string\", function () {\r",
+							"    pm.expect(pm.response.json().data.first_name).to.be.a('string').and.not.empty;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Verify the specific values of fields\r",
+							"pm.test(\"Positive Test - Verify the value of 'id' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.id).to.equal(2);\r",
+							"});\r",
+							"pm.test(\"Positive Test - Verify the value of 'email' field\", function () {\r",
+							"    pm.expect(pm.response.json().data.email).to.equal(\"janet.weaver@reqres.in\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Negative Test Cases\r",
+							"\r",
+							"// Verify the presence of 'support' object and its fields\r",
+							"pm.test(\"Negative Test - Verify the presence of 'support' object\", function () {\r",
+							"    pm.response.to.have.jsonBody('support');\r",
+							"});\r",
+							"\r",
+							"// Verify that the HTTP status code is not 404 (Not Found)\r",
+							"pm.test(\"Negative Test - Verify HTTP status code is not 404\", function () {\r",
+							"    pm.response.to.not.have.status(404);\r",
+							"});\r",
+							"\r",
+							"// Verify that the response body is not empty\r",
+							"pm.test(\"Negative Test - Verify the response body is not empty\", function () {\r",
+							"    pm.response.to.be.not.empty;\r",
+							"});\r",
+							"\r",
+							"// Verify the absence of specific values of fields\r",
+							"pm.test(\"Negative Test - Verify 'id' field is not a specific value\", function () {\r",
+							"    pm.expect(pm.response.json().data.id).to.not.equal(2);\r",
+							"});\r",
+							"pm.test(\"Negative Test - Verify 'email' field is not a specific value\", function () {\r",
+							"    pm.expect(pm.response.json().data.email).to.not.equal(\"janet.weaver@reqres.in\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
